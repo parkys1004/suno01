@@ -322,6 +322,73 @@
     color:var(--paper);
   }
 
+  /* ---------- resources ---------- */
+  .resources{
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+    margin-bottom:40px;
+  }
+  .resource{
+    display:grid;
+    grid-template-columns:1fr auto;
+    align-items:center;
+    gap:16px;
+    background:var(--ink-2);
+    border:1px solid var(--hairline);
+    padding:16px 18px;
+    text-decoration:none;
+    transition:border-color 0.15s ease, background 0.15s ease;
+  }
+  .resources a.resource:hover,
+  .resources a.resource:focus-visible{
+    border-color:var(--tangerine-dim);
+    background:var(--ink-3);
+  }
+  .resources a.resource:focus-visible{ outline:2px solid var(--teal); outline-offset:-2px; }
+  .resource:first-child{ border-radius:12px 12px 0 0; }
+  .resource:last-child{ border-radius:0 0 12px 12px; }
+  .resource + .resource{ border-top:none; margin-top:-1px; }
+
+  .resource-info{ min-width:0; }
+  .resource-kind{
+    display:block;
+    font-family:'JetBrains Meetup Mono', ui-monospace, monospace;
+    font-size:10.5px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--teal);
+    margin-bottom:4px;
+  }
+  .resource-title{
+    display:block;
+    font-family:'Manrope Meetup', sans-serif;
+    font-weight:700;
+    font-size:15.5px;
+    color:var(--paper);
+    margin-bottom:3px;
+  }
+  .resource-url{
+    display:block;
+    font-family:'JetBrains Meetup Mono', ui-monospace, monospace;
+    font-size:11.5px;
+    color:var(--muted-2);
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
+  .resource-go{
+    flex:none;
+    width:30px; height:30px;
+    border-radius:50%;
+    border:1px solid var(--hairline);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--tangerine);
+  }
+  .resource-go svg{ width:14px; height:14px; }
+
   /* ---------- footer ---------- */
   footer{
     border-top:1px solid var(--hairline);
@@ -394,6 +461,50 @@
         <p>곡을 다듬고 완성도를 높이는 실전 프로듀싱 노하우를 나눕니다. 궁금한 점은 현장에서 바로 물어보세요.</p>
       </div>
     </div>
+  </div>
+
+  <p class="section-label">관련 링크 &amp; 자료</p>
+  <div class="resources">
+    <a class="resource" href="https://drive.google.com/file/d/1t92aCfs9toXI8dXi4VWw252mw_6ZJ23w/view?usp=drive_link" target="_blank" rel="noopener">
+      <div class="resource-info">
+        <span class="resource-kind">Program · Drive</span>
+        <span class="resource-title">수노 음악 프롬프트 자동생성 &amp; 일괄 다운로드 프로그램</span>
+        <span class="resource-url">drive.google.com/file/d/1t92aCfs9…</span>
+      </div>
+      <span class="resource-go" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+      </span>
+    </a>
+    <a class="resource" href="https://spectrum-studio2026.vercel.app/" target="_blank" rel="noopener">
+      <div class="resource-info">
+        <span class="resource-kind">Web App</span>
+        <span class="resource-title">스펙트럼 적용 영상 제작 웹앱</span>
+        <span class="resource-url">spectrum-studio2026.vercel.app</span>
+      </div>
+      <span class="resource-go" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+      </span>
+    </a>
+    <a class="resource" href="https://notebooklm.google/" target="_blank" rel="noopener">
+      <div class="resource-info">
+        <span class="resource-kind">Tool</span>
+        <span class="resource-title">NotebookLM</span>
+        <span class="resource-url">notebooklm.google</span>
+      </div>
+      <span class="resource-go" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+      </span>
+    </a>
+    <a class="resource" href="https://chromewebstore.google.com/detail/youtube-to-notebooklm-you/kobncfkmjelbefaoohoblamnbackjggk" target="_blank" rel="noopener">
+      <div class="resource-info">
+        <span class="resource-kind">Chrome Extension</span>
+        <span class="resource-title">YouTube to NotebookLM</span>
+        <span class="resource-url">chromewebstore.google.com</span>
+      </div>
+      <span class="resource-go" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+      </span>
+    </a>
   </div>
 
   <div class="venue">
