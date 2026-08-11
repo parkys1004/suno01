@@ -271,6 +271,57 @@
     margin-bottom:12px;
   }
 
+  /* ---------- roster ---------- */
+  .roster-head{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:12px;
+    margin-bottom:16px;
+  }
+  .roster-count{
+    font-family:'JetBrains Meetup Mono', ui-monospace, monospace;
+    font-size:12px;
+    color:var(--muted-2);
+    font-variant-numeric:tabular-nums;
+  }
+  .roster-count b{ color:var(--tangerine); font-weight:400; }
+
+  .roster{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:40px;
+  }
+  .roster li{
+    list-style:none;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    background:var(--ink-2);
+    border:1px solid var(--hairline);
+    border-radius:99px;
+    padding:8px 16px 8px 10px;
+  }
+  .roster .avatar{
+    width:22px; height:22px;
+    border-radius:50%;
+    flex:none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--ink-3);
+    color:var(--teal);
+    font-family:'JetBrains Meetup Mono', ui-monospace, monospace;
+    font-size:10px;
+  }
+  .roster .nick{
+    font-family:'Manrope Meetup', sans-serif;
+    font-weight:700;
+    font-size:14px;
+    color:var(--paper);
+  }
+
   /* ---------- footer ---------- */
   footer{
     border-top:1px solid var(--hairline);
@@ -350,6 +401,19 @@
     <h2>벅구네 (부산대)</h2>
     <p>부산대학교 인근입니다. 정확한 위치는 당근 채팅으로 별도 안내드려요.</p>
   </div>
+
+  <div class="roster-head">
+    <p class="section-label" style="margin:0;">참가 명단</p>
+    <span class="roster-count"><b>6</b>명 참가</span>
+  </div>
+  <ul class="roster">
+    <li><span class="avatar" aria-hidden="true">뽀</span><span class="nick">뽀이약</span></li>
+    <li><span class="avatar" aria-hidden="true">미</span><span class="nick">미니미니</span></li>
+    <li><span class="avatar" aria-hidden="true">캐</span><span class="nick">캐논</span></li>
+    <li><span class="avatar" aria-hidden="true">매</span><span class="nick">매너거래</span></li>
+    <li><span class="avatar" aria-hidden="true">방</span><span class="nick">방울이</span></li>
+    <li><span class="avatar" aria-hidden="true">행</span><span class="nick">행복한하루</span></li>
+  </ul>
 
   <footer>
     <span class="brand"><b>당근모임</b> · 수노 프로듀서 모임</span>
