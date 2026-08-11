@@ -387,13 +387,31 @@
     margin-bottom:4px;
   }
   .resource-title{
-    display:block;
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:6px 8px;
     font-family:'Manrope Meetup', sans-serif;
     font-weight:700;
     font-size:15.5px;
     color:var(--paper);
     margin-bottom:3px;
   }
+  .dl-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:4px;
+    flex:none;
+    font-family:'JetBrains Meetup Mono', ui-monospace, monospace;
+    font-weight:400;
+    font-size:10px;
+    letter-spacing:0.04em;
+    color:var(--tangerine);
+    border:1px solid var(--tangerine-dim);
+    border-radius:99px;
+    padding:2px 8px 2px 6px;
+  }
+  .dl-badge svg{ width:10px; height:10px; }
   .resource-url{
     display:block;
     font-family:'JetBrains Meetup Mono', ui-monospace, monospace;
@@ -589,11 +607,16 @@
     <a class="resource" href="https://drive.google.com/file/d/1t92aCfs9toXI8dXi4VWw252mw_6ZJ23w/view?usp=drive_link" target="_blank" rel="noopener">
       <div class="resource-info">
         <span class="resource-kind">Program · Drive</span>
-        <span class="resource-title">수노 음악 프롬프트 자동생성 &amp; 일괄 다운로드 프로그램</span>
+        <span class="resource-title">수노 음악 프롬프트 자동생성 &amp; 일괄 다운로드 프로그램
+          <span class="dl-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
+            다운로드
+          </span>
+        </span>
         <span class="resource-url">drive.google.com/file/d/1t92aCfs9…</span>
       </div>
       <span class="resource-go" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
       </span>
     </a>
     <a class="resource" href="https://spectrum-studio2026.vercel.app/" target="_blank" rel="noopener">
@@ -619,11 +642,16 @@
     <a class="resource" href="https://chromewebstore.google.com/detail/pnnlnelknnpdljlkabehdmiapniffdlo?utm_source=item-share-cb" target="_blank" rel="noopener">
       <div class="resource-info">
         <span class="resource-kind">Chrome Extension</span>
-        <span class="resource-title">YouTube to NotebookLM</span>
+        <span class="resource-title">YouTube to NotebookLM
+          <span class="dl-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
+            다운로드
+          </span>
+        </span>
         <span class="resource-url">chromewebstore.google.com</span>
       </div>
       <span class="resource-go" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
       </span>
     </a>
     <a class="resource" href="https://bang-guseog.com/" target="_blank" rel="noopener">
