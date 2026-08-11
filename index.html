@@ -27,6 +27,38 @@
   }
 
   :root{
+    --ink:      #faf5e8;
+    --ink-2:    #f1e8d4;
+    --ink-3:    #e7dac0;
+    --hairline: #ddcda9;
+    --paper:    #241c11;
+    --muted:    #5c5140;
+    --muted-2:  #8c7f68;
+    --tangerine:#d9600f;
+    --tangerine-dim: #e3a876;
+    --teal:     #1f9683;
+    --shadow:   rgba(36,28,17,0.12);
+    --tangerine-glow: rgba(217,96,15,0.16);
+  }
+
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ink:      #15120e;
+      --ink-2:    #201a14;
+      --ink-3:    #2c241b;
+      --hairline: #3c3122;
+      --paper:    #f3ecdd;
+      --muted:    #a99a85;
+      --muted-2:  #786c5a;
+      --tangerine:#ff7a2e;
+      --tangerine-dim: #a5501d;
+      --teal:     #3fd3b7;
+      --shadow:   rgba(0,0,0,0.45);
+      --tangerine-glow: rgba(255,122,46,0.18);
+    }
+  }
+
+  :root[data-theme="dark"]{
     --ink:      #15120e;
     --ink-2:    #201a14;
     --ink-3:    #2c241b;
@@ -38,6 +70,7 @@
     --tangerine-dim: #a5501d;
     --teal:     #3fd3b7;
     --shadow:   rgba(0,0,0,0.45);
+    --tangerine-glow: rgba(255,122,46,0.18);
   }
 
   *{ box-sizing:border-box; }
@@ -52,6 +85,10 @@
     line-height:1.6;
     -webkit-font-smoothing:antialiased;
     text-rendering:optimizeLegibility;
+    transition:background 0.2s ease, color 0.2s ease;
+  }
+  @media (prefers-reduced-motion:reduce){
+    body{ transition:none; }
   }
 
   ::selection{ background:var(--tangerine); color:var(--ink); }
@@ -73,7 +110,9 @@
   .status{
     display:flex;
     align-items:center;
-    gap:10px;
+    justify-content:space-between;
+    gap:14px;
+    flex-wrap:wrap;
     font-family:'JetBrains Meetup Mono', ui-monospace, monospace;
     font-size:12.5px;
     letter-spacing:0.06em;
@@ -81,10 +120,15 @@
     color:var(--muted);
     margin-bottom:38px;
   }
+  .status-live{
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
   .dot{
     width:7px; height:7px; border-radius:50%;
     background:var(--tangerine);
-    box-shadow:0 0 0 3px rgba(255,122,46,0.18);
+    box-shadow:0 0 0 3px var(--tangerine-glow);
     flex:none;
     animation:pulse 2.2s ease-in-out infinite;
   }
@@ -94,6 +138,40 @@
     50%{ opacity:0.45; }
   }
   .status b{ color:var(--tangerine); font-weight:400; }
+
+  .theme-toggle{
+    display:inline-flex;
+    align-items:center;
+    gap:2px;
+    background:var(--ink-2);
+    border:1px solid var(--hairline);
+    border-radius:99px;
+    padding:3px;
+    flex:none;
+  }
+  .theme-toggle button{
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
+    border:0;
+    background:transparent;
+    color:var(--muted-2);
+    font-family:'JetBrains Meetup Mono', ui-monospace, monospace;
+    font-size:11px;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    border-radius:99px;
+    padding:6px 12px 6px 10px;
+    cursor:pointer;
+    transition:background 0.15s ease, color 0.15s ease;
+  }
+  .theme-toggle button svg{ width:13px; height:13px; }
+  .theme-toggle button:hover{ color:var(--paper); }
+  .theme-toggle button:focus-visible{ outline:2px solid var(--teal); outline-offset:2px; }
+  .theme-toggle button.is-active{
+    background:var(--tangerine);
+    color:var(--ink);
+  }
 
   /* ---------- hero ---------- */
   .hero{
@@ -519,8 +597,20 @@
 <div class="page">
 
   <div class="status">
-    <span class="dot" aria-hidden="true"></span>
-    <span>당근모임 · 부산 · <b>오늘 저녁 개최</b></span>
+    <span class="status-live">
+      <span class="dot" aria-hidden="true"></span>
+      <span>당근모임 · 부산 · <b>오늘 저녁 개최</b></span>
+    </span>
+    <span class="theme-toggle" role="group" aria-label="화면 테마 선택">
+      <button type="button" id="theme-light" aria-pressed="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.4M12 19.1v2.4M4.6 4.6l1.7 1.7M17.7 17.7l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.6 19.4l1.7-1.7M17.7 6.3l1.7-1.7"/></svg>
+        라이트
+      </button>
+      <button type="button" id="theme-dark" aria-pressed="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 14.5A8.5 8.5 0 1 1 9.5 3.5a7 7 0 0 0 11 11Z"/></svg>
+        다크
+      </button>
+    </span>
   </div>
 
   <div class="hero">
@@ -705,6 +795,16 @@
   var seeds = [];
   for(var i=0;i<bars;i++){ seeds.push(Math.random()*Math.PI*2); }
 
+  var waveColors = { a:'#ff7a2e', b:'#f3ecdd', c:'#3fd3b7' };
+  function refreshWaveColors(){
+    var cs = getComputedStyle(document.documentElement);
+    waveColors.a = cs.getPropertyValue('--tangerine').trim() || waveColors.a;
+    waveColors.b = cs.getPropertyValue('--paper').trim() || waveColors.b;
+    waveColors.c = cs.getPropertyValue('--teal').trim() || waveColors.c;
+  }
+  refreshWaveColors();
+  window.refreshWaveColors = refreshWaveColors;
+
   function size(){
     var rect = canvas.getBoundingClientRect();
     canvas.width = Math.max(1, Math.floor(rect.width * dpr));
@@ -727,9 +827,9 @@
       var x = i*gap + gap*0.3;
 
       var grad = ctx.createLinearGradient(0, mid-amp, 0, mid+amp);
-      grad.addColorStop(0, '#ff7a2e');
-      grad.addColorStop(0.5, '#f3ecdd');
-      grad.addColorStop(1, '#3fd3b7');
+      grad.addColorStop(0, waveColors.a);
+      grad.addColorStop(0.5, waveColors.b);
+      grad.addColorStop(1, waveColors.c);
       ctx.fillStyle = grad;
       ctx.globalAlpha = 0.85;
 
@@ -802,5 +902,45 @@
       }
     });
   });
+})();
+
+(function(){
+  var root = document.documentElement;
+  var btnLight = document.getElementById('theme-light');
+  var btnDark = document.getElementById('theme-dark');
+  var STORE_KEY = 'suno01-theme';
+
+  function systemPrefersDark(){
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+
+  function resolvedTheme(){
+    var stored = null;
+    try{ stored = localStorage.getItem(STORE_KEY); }catch(e){}
+    if(stored === 'light' || stored === 'dark') return stored;
+    return systemPrefersDark() ? 'dark' : 'light';
+  }
+
+  function updateButtons(theme){
+    var isDark = theme === 'dark';
+    btnLight.classList.toggle('is-active', !isDark);
+    btnDark.classList.toggle('is-active', isDark);
+    btnLight.setAttribute('aria-pressed', String(!isDark));
+    btnDark.setAttribute('aria-pressed', String(isDark));
+  }
+
+  function applyTheme(theme, persist){
+    root.setAttribute('data-theme', theme);
+    if(persist){
+      try{ localStorage.setItem(STORE_KEY, theme); }catch(e){}
+    }
+    updateButtons(theme);
+    if(window.refreshWaveColors) window.refreshWaveColors();
+  }
+
+  updateButtons(resolvedTheme());
+
+  btnLight.addEventListener('click', function(){ applyTheme('light', true); });
+  btnDark.addEventListener('click', function(){ applyTheme('dark', true); });
 })();
 </script>
