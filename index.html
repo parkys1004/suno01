@@ -415,6 +415,71 @@
   }
   .resource-go svg{ width:14px; height:14px; }
 
+  /* ---------- prompt examples ---------- */
+  .examples{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-bottom:24px;
+  }
+  .example{
+    display:grid;
+    grid-template-columns:1fr auto;
+    align-items:center;
+    gap:14px;
+    background:var(--ink-2);
+    border:1px solid var(--hairline);
+    border-left:2px solid var(--teal);
+    border-radius:10px;
+    padding:16px 16px 16px 18px;
+  }
+  .example-label{
+    display:block;
+    font-family:'JetBrains Meetup Mono', ui-monospace, monospace;
+    font-size:10.5px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--teal);
+    margin-bottom:6px;
+  }
+  .example-text{
+    margin:0;
+    font-size:14.5px;
+    line-height:1.55;
+    color:var(--paper);
+    max-width:54ch;
+  }
+  .example-text b{
+    color:var(--tangerine);
+    font-weight:700;
+  }
+
+  .copy-btn{
+    flex:none;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    background:transparent;
+    color:var(--muted);
+    border:1px solid var(--hairline);
+    border-radius:99px;
+    padding:8px 14px;
+    font-family:'Manrope Meetup', sans-serif;
+    font-weight:700;
+    font-size:12.5px;
+    cursor:pointer;
+    transition:border-color 0.15s ease, color 0.15s ease;
+  }
+  .copy-btn svg{ width:14px; height:14px; }
+  .copy-btn:hover{ border-color:var(--teal); color:var(--paper); }
+  .copy-btn:focus-visible{ outline:2px solid var(--teal); outline-offset:2px; }
+  .copy-btn.is-copied{ border-color:var(--tangerine); color:var(--tangerine); }
+
+  @media (max-width:520px){
+    .example{ grid-template-columns:1fr; }
+    .copy-btn{ width:fit-content; }
+  }
+
   /* ---------- footer ---------- */
   footer{
     border-top:1px solid var(--hairline);
@@ -494,6 +559,32 @@
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>
     지침서 보기
   </a>
+
+  <div class="examples">
+    <div class="example">
+      <div>
+        <span class="example-label">예시 1</span>
+        <p class="example-text">위 지침에 따라, <b>[K-Pop 댄스]</b> 장르로 '네온 사인 아래 펼쳐지는 밤의 추격전'을 주제로 곡을 만들어 줘.</p>
+      </div>
+      <button type="button" class="copy-btn" data-copy="위 지침에 따라, [K-Pop 댄스] 장르로 '네온 사인 아래 펼쳐지는 밤의 추격전'을 주제로 곡을 만들어 줘.">
+        <svg class="icon-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+        <svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><path d="M20 6 9 17l-5-5"/></svg>
+        <span class="copy-label">복사</span>
+      </button>
+    </div>
+    <div class="example">
+      <div>
+        <span class="example-label">예시 2</span>
+        <p class="example-text">위 지침을 적용해서, <b>[Neo-Soul / R&amp;B]</b> 장르의 감성적인 영어 신곡을 구성해 줘.</p>
+      </div>
+      <button type="button" class="copy-btn" data-copy="위 지침을 적용해서, [Neo-Soul / R&amp;B] 장르의 감성적인 영어 신곡을 구성해 줘.">
+        <svg class="icon-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+        <svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><path d="M20 6 9 17l-5-5"/></svg>
+        <span class="copy-label">복사</span>
+      </button>
+    </div>
+  </div>
+
   <div class="resources">
     <a class="resource" href="https://drive.google.com/file/d/1t92aCfs9toXI8dXi4VWw252mw_6ZJ23w/view?usp=drive_link" target="_blank" rel="noopener">
       <div class="resource-info">
@@ -623,5 +714,54 @@
       requestAnimationFrame(loop);
     });
   }
+})();
+
+(function(){
+  var buttons = document.querySelectorAll('.copy-btn');
+  buttons.forEach(function(btn){
+    var label = btn.querySelector('.copy-label');
+    var iconCopy = btn.querySelector('.icon-copy');
+    var iconCheck = btn.querySelector('.icon-check');
+    var resetTimer = null;
+
+    function showCopied(){
+      btn.classList.add('is-copied');
+      label.textContent = '복사됨';
+      iconCopy.style.display = 'none';
+      iconCheck.style.display = '';
+      clearTimeout(resetTimer);
+      resetTimer = setTimeout(function(){
+        btn.classList.remove('is-copied');
+        label.textContent = '복사';
+        iconCopy.style.display = '';
+        iconCheck.style.display = 'none';
+      }, 1600);
+    }
+
+    function fallbackCopy(text){
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      try{ document.execCommand('copy'); }catch(e){}
+      document.body.removeChild(ta);
+    }
+
+    btn.addEventListener('click', function(){
+      var text = btn.getAttribute('data-copy') || '';
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(showCopied, function(){
+          fallbackCopy(text);
+          showCopied();
+        });
+      } else {
+        fallbackCopy(text);
+        showCopied();
+      }
+    });
+  });
 })();
 </script>
